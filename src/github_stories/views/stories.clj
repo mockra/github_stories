@@ -5,18 +5,19 @@
   (:use [noir.core :only [defpage defpartial]]))
 
 (defpartial display-message [message]
-            [:li (clojure.string/replace message #"\n" "</br>")])
+            [:p.lead.alert (clojure.string/replace message #"\n" "</br>")])
 
 (defpartial display-messages [user repo]
-            [:ul (map display-message (stories/messages user repo))])
+            [:div.messages (map display-message (stories/messages user repo))])
 
 (defpartial display-repo [user repo]
             [:h1 user " " repo])
 
 (defpage "/" []
          (common/layout
-           [:p "Welcome"]))
+           [:p.lead
+            "To visit a repo's stories, go to /stories/:username/:repo"]))
 
-(defpage "/:user/:repo" {:keys [user repo]}
+(defpage "/stories/:user/:repo" {:keys [user repo]}
          (common/layout
-           [:body (display-repo user repo) (display-messages user repo)]))
+           [:div.hero-unit (display-repo user repo) (display-messages user repo)]))

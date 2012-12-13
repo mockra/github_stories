@@ -6,7 +6,7 @@
             (html5
               [:head
                [:title "github_stories"]
-               (include-css "/css/reset.css")]
+               (include-css "/css/bootstrap.css")]
               [:body
-               [:div#wrapper
+               [:div.container
                 content]]))
