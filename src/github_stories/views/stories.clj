@@ -7,10 +7,16 @@
 (defpartial display-message [message]
             [:li (clojure.string/replace message #"\n" "</br>")])
 
+(defpartial display-messages [user repo]
+            [:ul (map display-message (stories/messages user repo))])
+
+(defpartial display-repo [user repo]
+            [:h1 user " " repo])
+
 (defpage "/" []
          (common/layout
            [:p "Welcome"]))
 
 (defpage "/:user/:repo" {:keys [user repo]}
          (common/layout
-           [:ul (map display-message (stories/messages user repo))]))
+           [:body (display-repo user repo) (display-messages user repo)]))
