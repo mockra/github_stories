@@ -5,7 +5,7 @@
   (:use [noir.core :only [defpage defpartial]]))
 
 (defpartial display-message [message]
-            [:li message])
+            [:li (clojure.string/replace message #"\n" "</br>")])
 
 (defpage "/" []
          (common/layout
